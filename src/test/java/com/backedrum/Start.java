@@ -1,44 +1,61 @@
 package com.backedrum;
 
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.Server;
-import org.mortbay.jetty.bio.SocketConnector;
-import org.mortbay.jetty.webapp.WebAppContext;
+import org.eclipse.jetty.jmx.MBeanContainer;
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.webapp.WebAppContext;
+
+import javax.management.MBeanServer;
+import java.lang.management.ManagementFactory;
 
 public class Start {
 
 	public static void main(String[] args) throws Exception {
+		System.setProperty("wicket.configuration", "development");
+
 		Server server = new Server();
-		SocketConnector connector = new SocketConnector();
-		// Set some timeout options to make debugging easier.
-		connector.setMaxIdleTime(1000 * 60 * 60);
-		connector.setSoLingerTime(-1);
-		connector.setPort(8080);
-		server.setConnectors(new Connector[] { connector });
+
+		HttpConfiguration http_config = new HttpConfiguration();
+		http_config.setSecureScheme("https");
+		http_config.setSecurePort(8443);
+		http_config.setOutputBufferSize(32768);
+
+		ServerConnector http = new ServerConnector(server, new HttpConnectionFactory(http_config));
+		http.setPort(8080);
+		http.setIdleTimeout(1000 * 60 * 60);
+
+		server.addConnector(http);
 
 		WebAppContext bb = new WebAppContext();
 		bb.setServer(server);
 		bb.setContextPath("/");
 		bb.setWar("src/main/webapp");
 
-		
-		// START JMX SERVER
-		// MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
-		// MBeanContainer mBeanContainer = new MBeanContainer(mBeanServer);
-		// server.getContainer().addEventListener(mBeanContainer);
-		// mBeanContainer.start();
-		
-		server.addHandler(bb);
+		// uncomment the next two lines if you want to start Jetty with WebSocket (JSR-356) support
+		// you need org.apache.wicket:wicket-native-websocket-javax in the classpath!
+		// ServerContainer serverContainer = WebSocketServerContainerInitializer.configureContext(bb);
+		// serverContainer.addEndpoint(new WicketServerEndpointConfig());
 
-		try {
-			System.out.println(">>> STARTING EMBEDDED JETTY SERVER, PRESS ANY KEY TO STOP");
+		// uncomment next line if you want to test with JSESSIONID encoded in the urls
+		// ((AbstractSessionManager)
+		// bb.getSessionHandler().getSessionManager()).setUsingCookies(false);
+
+		server.setHandler(bb);
+
+		MBeanServer mBeanServer = ManagementFactory.getPlatformMBeanServer();
+		MBeanContainer mBeanContainer = new MBeanContainer(mBeanServer);
+		server.addEventListener(mBeanContainer);
+		server.addBean(mBeanContainer);
+
+		try
+		{
 			server.start();
-			while (System.in.available() == 0) {
-				Thread.sleep(5000);
-			}
-			server.stop();
 			server.join();
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			e.printStackTrace();
 			System.exit(100);
 		}

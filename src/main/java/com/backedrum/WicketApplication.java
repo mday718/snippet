@@ -12,10 +12,8 @@ public class WicketApplication extends WebApplication
     /**
      * Constructor
      */
-	public WicketApplication()
-	{
-	}
-	
+	public WicketApplication() {}
+
 	/**
 	 * @see wicket.Application#getHomePage()
 	 */

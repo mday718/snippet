@@ -1,11 +1,23 @@
-<html>
-    <head>
-        <title>Wicket Quickstart Archetype Homepage</title>
-    </head>
-    <body>
-        <strong>Wicket Quickstart Archetype Homepage</strong>
-        <br/><br/>
-        <span wicket:id="message">message will be here</span>
-    </body>
+<html xmlns:wicket="http://wicket.apache.org">
+<wicket:head>
+    <title>Source code snippets</title>
+</wicket:head>
+<body>
+    <form wicket:id="snippetsForm" id="snippetsForm">
+        Enter title:
+        <p>
+                <input type="text" wicket:id="title"/>
+        </p>
+        Enter source code snippet:
+        <p>
+                <textarea wicket:id="sourceCode">Source code</textarea>
+        </p>
+        <input type="submit" value="Submit" id="formsubmit"/>
+    </form>
+    <div wicket:id="snippets" id="snippets">
+        <span wicket:id="date"></span><br />
+        <span wicket:id="title"></span>
+        <span wicket:id="sourceCode"></span>
+    </div>
+</body>
 </html>
-
