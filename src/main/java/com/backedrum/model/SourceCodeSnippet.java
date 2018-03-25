@@ -1,4 +1,4 @@
-package com.backedrum;
+package com.backedrum.model;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -7,11 +7,7 @@ import lombok.ToString;
 import org.apache.wicket.util.io.IClusterable;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
-/**
- * Created by Andrii Zablodskyi (Andrii.Zablodskyi@gmail.com) on 2/10/18.
- */
 @Builder
 @Getter
 @Setter
