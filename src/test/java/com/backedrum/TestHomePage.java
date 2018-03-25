@@ -1,6 +1,6 @@
 package com.backedrum;
 
-import com.backedrum.component.HomePage;
+import com.backedrum.component.CodeSnippetsPage;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,9 +22,9 @@ public class TestHomePage
 	public void testRenderMyPage()
 	{
 		//start and render the test page
-		tester.startPage(HomePage.class);
+		tester.startPage(CodeSnippetsPage.class);
 
 		//assert rendered page class
-		tester.assertRenderedPage(HomePage.class);
+		tester.assertRenderedPage(CodeSnippetsPage.class);
 	}
 }

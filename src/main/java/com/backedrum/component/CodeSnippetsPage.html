@@ -3,21 +3,23 @@
     <title>Source code snippets</title>
 </wicket:head>
 <body>
+<wicket:extend>
     <form wicket:id="snippetsForm" id="snippetsForm">
         Enter snippet title:
         <p>
-                <input type="text" wicket:id="title"/>
+            <input type="text" wicket:id="title"/>
         </p>
         Enter source code snippet:
         <p>
-                <textarea wicket:id="sourceCode">Source code</textarea>
+            <textarea wicket:id="sourceCode">Source code</textarea>
         </p>
         <input type="submit" value="Submit" id="formsubmit"/>
     </form>
     <div wicket:id="snippets" id="snippets">
-        <span wicket:id="date"></span><br />
+        <span wicket:id="dateTime"></span><br/>
         <span wicket:id="title"></span>
         <span wicket:id="sourceCode"></span>
     </div>
+</wicket:extend>
 </body>
 </html>

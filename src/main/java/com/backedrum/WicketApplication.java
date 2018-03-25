@@ -1,6 +1,6 @@
 package com.backedrum;
 
-import com.backedrum.component.HomePage;
+import com.backedrum.component.CodeSnippetsPage;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 
@@ -14,7 +14,7 @@ public class WicketApplication extends WebApplication
 	public WicketApplication() {}
 
 	public Class getHomePage() {
-		return HomePage.class;
+		return CodeSnippetsPage.class;
 	}
 
 	@Override

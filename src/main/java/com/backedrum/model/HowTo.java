@@ -10,13 +10,13 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class SourceCodeSnippet extends Entity {
+public class HowTo extends Entity {
 
-    private String sourceCode;
+    private String text;
 
     @Builder
-    public SourceCodeSnippet(String title, LocalDateTime dateTime, String sourceCode) {
+    public HowTo(String title, LocalDateTime dateTime, String text) {
         super(title, dateTime);
-        this.sourceCode = sourceCode;
+        this.text = text;
     }
 }

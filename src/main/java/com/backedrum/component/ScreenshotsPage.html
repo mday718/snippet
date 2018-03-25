@@ -1,0 +1,25 @@
+<html xmlns:wicket="http://wicket.apache.org">
+<wicket:head>
+    <title>Screenshots</title>
+</wicket:head>
+<body>
+<wicket:extend>
+    <form wicket:id="screenshotsForm" id="screenshotsForm">
+        Enter screenshot title:
+        <p>
+            <input type="text" wicket:id="title"/>
+        </p>
+        <p>
+            <label>Select screenshot file:</label>
+            <!--<input wicket:id="screenshotUpload" type="file"/>-->
+            <!--<input type="submit" value="Upload screenshot"/>-->
+        </p>
+        <input type="submit" value="Submit" id="formsubmit"/>
+    </form>
+    <div wicket:id="screenshots" id="screenshots">
+        <span wicket:id="dateTime"></span><br/>
+        <span wicket:id="title"></span>
+    </div>
+</wicket:extend>
+</body>
+</html>
