@@ -5,15 +5,15 @@
 <body>
 <wicket:extend>
     <form wicket:id="screenshotsForm" id="screenshotsForm">
-        Enter screenshot title:
-        <p>
-            <input type="text" wicket:id="title"/>
-        </p>
-        <p>
+        <div class="form-group">
+        <label for="title">Enter screenshot title:</label>
+            <input type="text" id="title" class="form-control" wicket:id="title"/>
+        </div>
+        <div class="form-group">
             <label>Select screenshot file:</label>
             <!--<input wicket:id="screenshotUpload" type="file"/>-->
-            <!--<input type="submit" value="Upload screenshot"/>-->
-        </p>
+            <!--<input type="submit" class="form-control" value="Upload screenshot"/>-->
+        </div>
         <input type="submit" value="Submit" id="formsubmit"/>
     </form>
     <div wicket:id="screenshots" id="screenshots">

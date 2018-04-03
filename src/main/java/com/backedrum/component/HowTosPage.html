@@ -3,23 +3,23 @@
     <title>HOW-TO</title>
 </wicket:head>
 <body>
-<wicket:extend>
-    <form wicket:id="howtosForm" id="howtosForm">
-        Enter TODO title:
-        <p>
-            <input type="text" wicket:id="title"/>
-        </p>
-        Enter TODO text:
-        <p>
-            <textarea wicket:id="text">Text</textarea>
-        </p>
-        <input type="submit" value="Submit" id="formsubmit"/>
-    </form>
-    <div wicket:id="howtos" id="todos">
-        <span wicket:id="dateTime"></span><br/>
-        <span wicket:id="title"></span>
-        <span wicket:id="text"></span>
-    </div>
-</wicket:extend>
+        <wicket:extend>
+            <form wicket:id="howtosForm" id="howtosForm">
+                <div class="form-group">
+                    <label for="title">Enter HOW-TO title:</label>
+                    <input type="text" id="title" class="form-control" wicket:id="title"/>
+                </div>
+                <div class="form-group">
+                    <label for="todoText">Enter HOW-TO text:</label>
+                    <textarea class="form-control" rows="10" id="todoText" wicket:id="text">Enter a text</textarea>
+                </div>
+                <input type="submit" value="Submit" id="formsubmit"/>
+            </form>
+            <div wicket:id="howtos" id="todos">
+                <span wicket:id="dateTime"></span><br/>
+                <span wicket:id="title"></span>
+                <span wicket:id="text"></span>
+            </div>
+        </wicket:extend>
 </body>
 </html>

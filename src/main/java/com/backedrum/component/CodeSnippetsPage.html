@@ -5,14 +5,14 @@
 <body>
 <wicket:extend>
     <form wicket:id="snippetsForm" id="snippetsForm">
-        Enter snippet title:
-        <p>
-            <input type="text" wicket:id="title"/>
-        </p>
-        Enter source code snippet:
-        <p>
-            <textarea wicket:id="sourceCode">Source code</textarea>
-        </p>
+        <div class="form-group">
+        <label for="title">Enter snippet title:</label>
+        <input type="text" id="title" class="form-control" wicket:id="title"/>
+        </div>
+        <div class="form-group">
+            <label for="sourceCode">Enter source code snippet:</label>
+            <textarea id="sourceCode" class="form-control" wicket:id="sourceCode" rows="25">Source code</textarea>
+        </div>
         <input type="submit" value="Submit" id="formsubmit"/>
     </form>
     <div wicket:id="snippets" id="snippets">
