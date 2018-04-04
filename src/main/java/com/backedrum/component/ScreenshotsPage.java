@@ -5,8 +5,10 @@ import com.backedrum.service.ItemsService;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.image.Image;
+import org.apache.wicket.markup.html.image.NonCachingImage;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.CompoundPropertyModel;
@@ -37,7 +39,7 @@ public class ScreenshotsPage extends BasePage {
                 listItem.add(new Label("dateTime"));
                 listItem.add(new Label("title"));
 
-                listItem.add(new Image("screenshotImage", new DynamicImageResource() {
+                listItem.add(new NonCachingImage("screenshotImage", new DynamicImageResource() {
                     @Override
                     protected byte[] getImageData(Attributes attributes) {
                         return listItem.getModelObject().getImage();
@@ -69,10 +71,12 @@ public class ScreenshotsPage extends BasePage {
         protected void onSubmit() {
             ValueMap values = getModelObject();
 
+            FileUpload last = fileUploadField.getFileUploads().get(fileUploadField.getFileUploads().size() - 1);
+
             Screenshot screenshot = Screenshot.builder()
                     .dateTime(LocalDateTime.now())
                     .title((String) values.get("title"))
-                    .image(fileUploadField.getFileUpload().getBytes()).build();
+                    .image(last.getBytes()).build();
             screenshotService.addItem(screenshot);
 
             values.put("title", "");
