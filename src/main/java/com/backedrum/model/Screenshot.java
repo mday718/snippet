@@ -11,8 +11,11 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 public class Screenshot extends Entity {
+    private byte[] image;
+
     @Builder
-    public Screenshot(String title, LocalDateTime dateTime) {
+    public Screenshot(String title, LocalDateTime dateTime, byte[] image) {
             super(title, dateTime);
+            this.image = image;
     }
 }

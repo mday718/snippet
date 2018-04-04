@@ -5,9 +5,13 @@ import com.backedrum.service.ItemsService;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.upload.FileUploadField;
+import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.PropertyListView;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.request.resource.DynamicImageResource;
+import org.apache.wicket.util.lang.Bytes;
 import org.apache.wicket.util.value.ValueMap;
 import org.springframework.beans.factory.annotation.Qualifier;
 
@@ -32,11 +36,19 @@ public class ScreenshotsPage extends BasePage {
             protected void populateItem(ListItem<Screenshot> listItem) {
                 listItem.add(new Label("dateTime"));
                 listItem.add(new Label("title"));
+
+                listItem.add(new Image("screenshotImage", new DynamicImageResource() {
+                    @Override
+                    protected byte[] getImageData(Attributes attributes) {
+                        return listItem.getModelObject().getImage();
+                    }
+                }));
             }
         }).setVersioned(false);
     }
 
     public final class ScreenshotForm extends Form<ValueMap> {
+        private FileUploadField fileUploadField;
 
         ScreenshotForm(String id) {
             super(id, new CompoundPropertyModel<>(new ValueMap()));
@@ -44,6 +56,13 @@ public class ScreenshotsPage extends BasePage {
             setMarkupId("screenshotsForm");
 
             add(new TextField<>("title").setType(String.class));
+
+            setMultiPart(true);
+
+            add(fileUploadField = new FileUploadField("screenshotUpload"));
+
+            setMaxSize(Bytes.kilobytes(512));
+            setFileMaxSize(Bytes.kilobytes(512));
         }
 
         @Override
@@ -52,7 +71,8 @@ public class ScreenshotsPage extends BasePage {
 
             Screenshot screenshot = Screenshot.builder()
                     .dateTime(LocalDateTime.now())
-                    .title((String) values.get("title")).build();
+                    .title((String) values.get("title"))
+                    .image(fileUploadField.getFileUpload().getBytes()).build();
             screenshotService.addItem(screenshot);
 
             values.put("title", "");
