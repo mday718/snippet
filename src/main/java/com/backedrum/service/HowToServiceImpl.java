@@ -1,24 +1,27 @@
 package com.backedrum.service;
 
 import com.backedrum.model.HowTo;
+import com.backedrum.repository.HowToRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service("howtoService")
 public class HowToServiceImpl implements ItemsService<HowTo> {
 
-    private List<HowTo> howTos = new ArrayList<>();
+    @Inject
+    private HowToRepository repository;
 
     @Override
+    @Transactional
     public void addItem(HowTo entity) {
-        howTos.add(entity);
+        repository.save(entity);
     }
 
     @Override
     public List<HowTo> retrieveAllItems() {
-        return Collections.unmodifiableList(howTos);
+        return repository.findAll();
     }
 }

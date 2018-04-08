@@ -2,7 +2,6 @@ package com.backedrum.component;
 
 import com.backedrum.model.SourceCodeSnippet;
 import com.backedrum.service.ItemsService;
-import com.backedrum.service.SnippetServiceImpl;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.basic.MultiLineLabel;
 import org.apache.wicket.markup.html.form.Form;
