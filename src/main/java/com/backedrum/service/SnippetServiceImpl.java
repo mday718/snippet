@@ -1,24 +1,29 @@
 package com.backedrum.service;
 
 import com.backedrum.model.SourceCodeSnippet;
+import com.backedrum.repository.SnippetRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import javax.inject.Inject;
 import java.util.List;
 
 @Service("snippetService")
 public class SnippetServiceImpl implements ItemsService<SourceCodeSnippet> {
 
-    private List<SourceCodeSnippet> snippets = new ArrayList<>();
+    private final SnippetRepository repository;
+
+    @Inject
+    public SnippetServiceImpl(SnippetRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void addItem(SourceCodeSnippet snippet) {
-        snippets.add(0, snippet);
+        repository.save(snippet);
     }
 
     @Override
     public List<SourceCodeSnippet> retrieveAllItems() {
-        return Collections.unmodifiableList(snippets);
+        return repository.findAll();
     }
 }

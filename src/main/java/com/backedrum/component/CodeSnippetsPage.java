@@ -63,6 +63,8 @@ public class CodeSnippetsPage extends BasePage {
 
 			values.put("title", "");
 			values.put("sourceCode", "");
+
+			setResponsePage(CodeSnippetsPage.class);
 		}
 	}
 }

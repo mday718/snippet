@@ -63,6 +63,8 @@ public class HowTosPage extends BasePage {
 
 			values.put("title", "");
 			values.put("text", "");
+
+			setResponsePage(HowTosPage.class);
 		}
 	}
 }

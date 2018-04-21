@@ -1,23 +1,29 @@
 package com.backedrum.service;
 
 import com.backedrum.model.Screenshot;
+import com.backedrum.repository.ScreenshotRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import javax.inject.Inject;
 import java.util.List;
 
 @Service("screenshotService")
 public class ScreenshotServiceImpl implements ItemsService<Screenshot> {
-    private List<Screenshot> screenshots = new ArrayList<>();
+
+    private final ScreenshotRepository repository;
+
+    @Inject
+    public ScreenshotServiceImpl(ScreenshotRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     public void addItem(Screenshot entity) {
-        screenshots.add(entity);
+        repository.save(entity);
     }
 
     @Override
     public List<Screenshot> retrieveAllItems() {
-        return Collections.unmodifiableList(screenshots);
+        return repository.findAll();
     }
 }

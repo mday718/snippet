@@ -11,8 +11,12 @@ import java.util.List;
 @Service("howtoService")
 public class HowToServiceImpl implements ItemsService<HowTo> {
 
+    private final HowToRepository repository;
+
     @Inject
-    private HowToRepository repository;
+    public HowToServiceImpl(HowToRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
     @Transactional

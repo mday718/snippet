@@ -79,6 +79,8 @@ public class ScreenshotsPage extends BasePage {
             screenshotService.addItem(screenshot);
 
             values.put("title", "");
+
+            setResponsePage(ScreenshotsPage.class);
         }
     }
 
