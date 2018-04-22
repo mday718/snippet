@@ -2,6 +2,7 @@ package com.backedrum.component;
 
 import com.backedrum.model.Screenshot;
 import com.backedrum.service.ItemsService;
+import lombok.val;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -72,7 +73,7 @@ public class ScreenshotsPage extends BasePage {
 
             FileUpload last = fileUploadField.getFileUploads().get(fileUploadField.getFileUploads().size() - 1);
 
-            Screenshot screenshot = Screenshot.builder()
+            val screenshot = Screenshot.builder()
                     .dateTime(LocalDateTime.now())
                     .title((String) values.get("title"))
                     .image(last.getBytes()).build();

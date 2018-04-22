@@ -23,6 +23,11 @@ public class SnippetServiceImpl implements ItemsService<SourceCodeSnippet> {
     }
 
     @Override
+    public void removeItem(Long id) {
+        repository.delete(id);
+    }
+
+    @Override
     public List<SourceCodeSnippet> retrieveAllItems() {
         return repository.findAll();
     }

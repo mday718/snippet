@@ -5,7 +5,6 @@ import com.backedrum.repository.HowToRepository;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Service("howtoService")
@@ -19,9 +18,13 @@ public class HowToServiceImpl implements ItemsService<HowTo> {
     }
 
     @Override
-    @Transactional
     public void addItem(HowTo entity) {
         repository.save(entity);
+    }
+
+    @Override
+    public void removeItem(Long id) {
+        repository.delete(id);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class JPAConfig {
 
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
-        HibernateJpaVendorAdapter bean = new HibernateJpaVendorAdapter();
+        val bean = new HibernateJpaVendorAdapter();
         bean.setDatabase(Database.POSTGRESQL);
         bean.setShowSql(false);
         bean.setGenerateDdl(true);
@@ -41,7 +41,7 @@ public class JPAConfig {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
-        LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
+        val bean = new LocalContainerEntityManagerFactoryBean();
         bean.setDataSource(dataSource);
         bean.setJpaVendorAdapter(jpaVendorAdapter);
         bean.setPackagesToScan("com.backedrum.model");

@@ -23,6 +23,11 @@ public class ScreenshotServiceImpl implements ItemsService<Screenshot> {
     }
 
     @Override
+    public void removeItem(Long id) {
+        repository.delete(id);
+    }
+
+    @Override
     public List<Screenshot> retrieveAllItems() {
         return repository.findAll();
     }

@@ -2,6 +2,7 @@ package com.backedrum.component;
 
 import com.backedrum.model.SourceCodeSnippet;
 import com.backedrum.service.ItemsService;
+import lombok.val;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.basic.MultiLineLabel;
 import org.apache.wicket.markup.html.form.Form;
@@ -55,7 +56,7 @@ public class CodeSnippetsPage extends BasePage {
 		protected void onSubmit() {
 			ValueMap values = getModelObject();
 
-			SourceCodeSnippet snippet = SourceCodeSnippet.builder()
+			val snippet = SourceCodeSnippet.builder()
 					.dateTime(LocalDateTime.now())
 					.title((String) values.get("title"))
 					.sourceCode((String) values.get("sourceCode")).build();
