@@ -16,9 +16,11 @@
         <input type="submit" class="btn btn-dark" value="Submit" id="formsubmit"/>
     </form>
     <div wicket:id="screenshots" id="screenshots">
-        <span wicket:id="dateTime"></span><br/>
-        <span wicket:id="title"></span><br/>
-        <img wicket:id="screenshotImage"/>
+        <div class="border" style="margin-bottom: 15px;">
+        <span class="text-muted" wicket:id="dateTime"></span><br/>
+        <span class="text-primary font-weight-bold font-italic" wicket:id="title"></span><br/>
+        <img class="img-fluid rounded" wicket:id="screenshotImage"/>
+        </div>
     </div>
 </wicket:extend>
 </body>

@@ -6,8 +6,8 @@
 <wicket:extend>
     <form wicket:id="snippetsForm" id="snippetsForm">
         <div class="form-group">
-        <label for="title">Enter snippet title:</label>
-        <input type="text" id="title" class="form-control" wicket:id="title"/>
+            <label for="title">Enter snippet title:</label>
+            <input type="text" id="title" class="form-control" wicket:id="title"/>
         </div>
         <div class="form-group">
             <label for="sourceCode">Enter source code snippet:</label>
@@ -16,10 +16,16 @@
         <input type="submit" class="btn btn-dark" value="Submit" id="formsubmit"/>
     </form>
     <div wicket:id="snippets" id="snippets">
-        <span wicket:id="dateTime"></span><br/>
-        <span wicket:id="title"></span>
-        <span wicket:id="sourceCode"></span>
+        <div style="margin-bottom: 15px;">
+        <span class="text-muted" wicket:id="dateTime"></span><br/>
+        <span class="text-primary font-weight-bold font-italic" wicket:id="title"></span>
+        <pre>
+        <code wicket:id="sourceCode">
+        </code>
+        </pre>
+        </div>
     </div>
 </wicket:extend>
+
 </body>
 </html>

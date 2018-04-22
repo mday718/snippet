@@ -16,9 +16,11 @@
                 <input type="submit" class="btn btn-dark" value="Submit" id="formsubmit"/>
             </form>
             <div wicket:id="howtos" id="todos">
-                <span wicket:id="dateTime"></span><br/>
-                <span wicket:id="title"></span>
-                <span wicket:id="text"></span>
+                <div style="margin-bottom: 15px;">
+                <span class="text-muted" wicket:id="dateTime"></span><br/>
+                <span class="text-primary font-weight-bold font-italic" wicket:id="title"></span>
+                <span class="text-info" wicket:id="text"></span>
+                </div>
             </div>
         </wicket:extend>
 </body>
