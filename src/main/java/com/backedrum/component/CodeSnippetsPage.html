@@ -15,15 +15,18 @@
         </div>
         <input type="submit" class="btn btn-dark" value="Submit" id="formsubmit"/>
     </form>
+
+    <div wicket:id="snippetsContainer">
     <div wicket:id="snippets" id="snippets">
         <div style="margin-bottom: 15px;">
-        <span class="text-muted" wicket:id="dateTime"></span><br/>
+        <span class="text-muted" wicket:id="dateTime"></span>&nbsp;<a href="#" class="text-danger fas fa-trash-alt" wicket:id="removeSnippet">Remove</a><br/>
         <span class="text-primary font-weight-bold font-italic" wicket:id="title"></span>
         <pre>
         <code wicket:id="sourceCode">
         </code>
         </pre>
         </div>
+    </div>
     </div>
 </wicket:extend>
 
