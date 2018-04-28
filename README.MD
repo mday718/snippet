@@ -14,6 +14,10 @@ c. Start a server:
 ```
 mvn clean compile exec:java
 ```
+d. Create an ADMIN user by executing this query to 'snippet' db:
+```
+insert into users (datetime, username, password) values(now()::timestamp, '<your user name>', '<password encoded in base64>');
+```
 
 Then point your browser to the <i>localhost://8080</i>
 

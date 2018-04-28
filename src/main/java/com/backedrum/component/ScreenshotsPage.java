@@ -25,7 +25,7 @@ import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class ScreenshotsPage extends BasePage {
+public class ScreenshotsPage extends BasePage implements AuthenticatedPage {
     private static final long serialVersionUID = 1L;
 
     @Qualifier("screenshotService")

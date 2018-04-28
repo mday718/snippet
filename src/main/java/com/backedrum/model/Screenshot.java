@@ -8,12 +8,14 @@ import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @ToString
 @Entity
+@Table(name = "screenshots")
 @NoArgsConstructor
 public class Screenshot extends BaseEntity {
     @Column

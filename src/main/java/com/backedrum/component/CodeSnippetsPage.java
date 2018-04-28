@@ -1,6 +1,5 @@
 package com.backedrum.component;
 
-import com.backedrum.model.Screenshot;
 import com.backedrum.model.SourceCodeSnippet;
 import com.backedrum.service.ItemsService;
 import lombok.val;
@@ -23,7 +22,7 @@ import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class CodeSnippetsPage extends BasePage {
+public class CodeSnippetsPage extends BasePage implements AuthenticatedPage {
 
 	private static final long serialVersionUID = 1L;
 

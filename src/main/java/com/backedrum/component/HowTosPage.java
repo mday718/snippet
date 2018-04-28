@@ -22,7 +22,7 @@ import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class HowTosPage extends BasePage {
+public class HowTosPage extends BasePage implements AuthenticatedPage {
 
     private static final long serialVersionUID = 1L;
 
