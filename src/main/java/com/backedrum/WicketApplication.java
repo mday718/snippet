@@ -9,14 +9,17 @@ import com.backedrum.component.SignedInSession;
 import com.backedrum.component.SignedOut;
 import com.backedrum.model.HowTo;
 import org.apache.wicket.RestartResponseAtInterceptPageException;
+import org.apache.wicket.RuntimeConfigurationType;
 import org.apache.wicket.Session;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.https.HttpsConfig;
 import org.apache.wicket.protocol.https.HttpsMapper;
+import org.apache.wicket.protocol.https.Scheme;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.request.component.IRequestableComponent;
+import org.apache.wicket.request.component.IRequestablePage;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 
 /**
@@ -58,6 +61,17 @@ public class WicketApplication extends WebApplication {
             }
         });
 
-        setRootRequestMapper(new HttpsMapper(getRootRequestMapper(), new HttpsConfig(8080, 8443)));
+        mountPage("/logon", SignIn.class);
+        mountPage("/snippets", CodeSnippetsPage.class);
+        mountPage("/howtos", HowTosPage.class);
+        mountPage("/screenshots", ScreenshotsPage.class);
+        mountPage("/logout", SignedOut.class);
+
+        setRootRequestMapper(new HttpsMapper(getRootRequestMapper(), new HttpsConfig(8080, 8443)) {
+            @Override
+            protected Scheme getDesiredSchemeFor(Class<? extends IRequestablePage> pageClass) {
+                return RuntimeConfigurationType.DEVELOPMENT == getConfigurationType() ? Scheme.HTTP : super.getDesiredSchemeFor(pageClass);
+            }
+        });
     }
 }
