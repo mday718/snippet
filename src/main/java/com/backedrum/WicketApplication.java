@@ -2,12 +2,18 @@ package com.backedrum;
 
 import com.backedrum.component.AuthenticatedPage;
 import com.backedrum.component.CodeSnippetsPage;
+import com.backedrum.component.HowTosPage;
+import com.backedrum.component.ScreenshotsPage;
 import com.backedrum.component.SignIn;
 import com.backedrum.component.SignedInSession;
+import com.backedrum.component.SignedOut;
+import com.backedrum.model.HowTo;
 import org.apache.wicket.RestartResponseAtInterceptPageException;
 import org.apache.wicket.Session;
 import org.apache.wicket.authorization.IAuthorizationStrategy;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.https.HttpsConfig;
+import org.apache.wicket.protocol.https.HttpsMapper;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Response;
 import org.apache.wicket.request.component.IRequestableComponent;
@@ -52,7 +58,6 @@ public class WicketApplication extends WebApplication {
             }
         });
 
+        setRootRequestMapper(new HttpsMapper(getRootRequestMapper(), new HttpsConfig(8080, 8443)));
     }
-
-
 }
