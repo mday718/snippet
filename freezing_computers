@@ -1,0 +1,86 @@
+Function Modify-ACLForUser {
+   
+   [cmdletbinding()]
+   param (
+       [string]$SuccessLog = "\\NEWCCI-VMFS1\vol1\shared\center\X CCI_ADMIN\Tech Support\Admin\AuthenticatedUserLogs\success.txt",
+
+       [string]$ErrorLog = "\\NEWCCI-VMFS1\vol1\shared\center\X CCI_ADMIN\Tech Support\Admin\AuthenticatedUserLogs\ErrorLog_$env:COMPUTERNAME.txt"
+   )
+
+   begin {Set-Location C:\}
+
+   process {
+       TRY {
+
+           #Using the .NET class System.Security.Principal.SecurityIdentifier to pull NT Authority\Authenticated User's SID
+           $ObjectSID = New-Object System.Security.Principal.SecurityIdentifier ('S-1-5-11')
+           #Translating the SID into an account string.
+           $ObjectUSER = $ObjectSID.Translate( [System.Security.Principal.NTAccount])
+           #Creating final string from SID
+           $AUTHUSER = $ObjectUSER
+               
+           #Getting Access Control List Permissions for NT Authority\Authenticated User
+           $GetACL = Get-Acl -Filter $AUTHUSER
+               
+           #Testing path to see what admin account exists
+           #NEW: Test-Path
+           $PathExists = Test-Path 'C:\Users\Administrator'
+           $PathExists2 = Test-Path 'C:\Users\cci'
+           $PathExists3 = Test-path 'CL\Users\cciadmin'
+           #NEW : IF STATEMENT
+           IF ($PathExists -like $true) {
+               $ACLPath = 'C:\Users\Administrator'
+               $ParamsForSetACL = @{
+                   'Path'        = $ACLPath
+                   'AclObject'   = $GetACL
+                   'ErrorAction' = 'SilentlyContinue'
+               }
+
+               $SetACL = Set-Acl @ParamsForSetACL
+               New-Object System.Security.AccessControl.FileSystemAccessRule('Administrator', 'Modify', 'ContainerInherit,ObjectInherit', 'None', 'Allow')
+
+               $env:COMPUTERNAME | Out-File $SuccessLog -Append
+           } #IF
+   
+           elseif ($PathExists2 -like $true) {
+               $ACLPath2 = 'C:\Users\cci'
+               $ParamsForSetACL = @{
+                   'Path'        = $ACLPath2
+                   'AclObject'   = $GetACL
+                   'ErrorAction' = 'SilentlyContinue'
+               }
+
+               $SetACL = Set-Acl @ParamsForSetACL
+               New-Object System.Security.AccessControl.FileSystemAccessRule('cci', 'Modify', 'ContainerInherit,ObjectInherit', 'None', 'Allow')
+                                   
+               $env:COMPUTERNAME | Out-File $SuccessLog -Append
+           } #ELSEIF
+
+           elseif ($PathExists3 -like $true) {
+               $ACLPath3 = 'C:\Users\cciadmin'
+               $ParamsForSetACL = @{
+                   'Path'        = $ACLPath3
+                   'AclObject'   = $GetACL
+                   'ErrorAction' = 'SilentlyContinue'
+               }
+
+               $SetACL = Set-Acl @ParamsForSetACL
+               New-Object System.Security.AccessControl.FileSystemAccessRule('cciadmin', 'Modify', 'ContainerInherit,ObjectInherit', 'None', 'Allow')
+                                   
+               $env:COMPUTERNAME | Out-File $SuccessLog -Append
+
+           } #ELSE                      
+       }# TRY
+
+       CATCH {
+           Write-Warning 'An error has occured. Please look at the logs under \\NEWCCI-VMFS1\vol1\shared\center\X CCI_ADMIN\Tech Support\Admin\AuthenticatedUserLogs\ErrorLog.txt'
+           $_ | Out-File $ErrorLog -Append
+           Throw
+
+
+       }# CATCH
+   }#Process
+   end {}
+
+} #Function
+Modify-ACLForUser
